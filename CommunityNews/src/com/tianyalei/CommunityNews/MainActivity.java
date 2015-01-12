@@ -24,9 +24,6 @@ public class MainActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-<<<<<<< HEAD
-        setContentView(com.tianyalei.CommunityNews.R.layout.main);
-=======
         setContentView(R.layout.main);
 
         mContext = this;
@@ -128,6 +125,5 @@ public class MainActivity extends Activity {
                     }
                 });
         builder.show();
->>>>>>> dev
     }
 }
