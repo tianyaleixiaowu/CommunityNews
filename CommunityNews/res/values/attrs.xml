@@ -2,5 +2,6 @@
 <resources>
     <declare-styleable name="TabView">
         <attr name="tabView" format="reference" />
+        <attr name = "tabPageIndicator" format = "reference"/>
     </declare-styleable>
 </resources>
