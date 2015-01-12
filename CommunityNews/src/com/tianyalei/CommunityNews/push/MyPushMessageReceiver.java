@@ -1,4 +1,4 @@
-package com.tianyalei.CommunityNews.push;
+package com.tianyalei.communitynews.push;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,9 +7,9 @@ import android.util.Log;
 import com.ab.http.wolf.GetDataCallBack;
 import com.ab.util.AbSharedUtil;
 import com.baidu.frontia.api.FrontiaPushMessageReceiver;
-import com.tianyalei.CommunityNews.MainActivity;
-import com.tianyalei.CommunityNews.utils.Utils;
-import com.tianyalei.CommunityNews.utils.http.HttpUtil;
+import com.tianyalei.communitynews.MainActivity;
+import com.tianyalei.communitynews.utils.Utils;
+import com.tianyalei.communitynews.utils.http.HttpUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 

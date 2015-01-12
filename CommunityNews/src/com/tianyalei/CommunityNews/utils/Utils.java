@@ -1,4 +1,4 @@
-package com.tianyalei.CommunityNews.utils;
+package com.tianyalei.communitynews.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

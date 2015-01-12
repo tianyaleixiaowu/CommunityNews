@@ -1,10 +1,10 @@
-package com.tianyalei.CommunityNews.utils.http;
+package com.tianyalei.communitynews.utils.http;
 
 import com.ab.http.AbHttpUtil;
 import com.ab.http.AbRequestParams;
 import com.ab.http.AbStringHttpResponseListener;
 import com.ab.http.wolf.GetDataCallBack;
-import com.tianyalei.CommunityNews.application.MyApplication;
+import com.tianyalei.communitynews.application.MyApplication;
 
 import java.util.HashMap;
 

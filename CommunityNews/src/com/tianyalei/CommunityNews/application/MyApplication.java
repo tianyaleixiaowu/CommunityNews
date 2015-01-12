@@ -1,4 +1,4 @@
-package com.tianyalei.CommunityNews.application;
+package com.tianyalei.communitynews.application;
 
 import com.baidu.frontia.FrontiaApplication;
 
