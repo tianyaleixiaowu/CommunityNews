@@ -1,6 +1,5 @@
 package com.tianyalei.communitynews;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.content.Context;
@@ -14,13 +13,14 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.ab.activity.AbActivity;
 import com.baidu.android.pushservice.CustomPushNotificationBuilder;
 import com.baidu.android.pushservice.PushConstants;
 import com.baidu.android.pushservice.PushManager;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.tianyalei.communitynews.adapter.ImageViewPagerAdapter;
-import com.tianyalei.communitynews.utils.Utils;
+import com.tianyalei.communitynews.utils.BaiduPushUtils;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AbActivity {
     /**
      * ViewPager
      */
@@ -144,7 +144,7 @@ public class MainActivity extends Activity {
         // "api_key")
         PushManager.startWork(getApplicationContext(),
                 PushConstants.LOGIN_TYPE_API_KEY,
-                Utils.getMetaValue(this, "api_key"));
+                BaiduPushUtils.getMetaValue(this, "api_key"));
         // Push: 如果想基于地理位置推送，可以打开支持地理位置的推送的开关
         // PushManager.enableLbs(getApplicationContext());
 

@@ -1,4 +1,4 @@
-package com.tianyalei.communitynews;
+package com.tianyalei.communitynews.fragment;
 
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -18,6 +18,7 @@ import com.shizhefei.view.indicator.slidebar.ColorBar;
 import com.shizhefei.view.indicator.slidebar.LayoutBar;
 import com.shizhefei.view.indicator.slidebar.ScrollBar.Gravity;
 import com.shizhefei.view.indicator.transition.OnTransitionTextListener;
+import com.tianyalei.communitynews.R;
 
 public class MainFragment extends BaseFragment {
 	private IndicatorViewPager indicatorViewPager;

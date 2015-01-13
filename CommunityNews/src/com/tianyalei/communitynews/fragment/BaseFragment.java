@@ -1,4 +1,4 @@
-package com.tianyalei.communitynews;
+package com.tianyalei.communitynews.fragment;
 
 import android.content.Context;
 import android.os.Bundle;

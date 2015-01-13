@@ -12,7 +12,7 @@ import android.preference.PreferenceManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Utils {
+public class BaiduPushUtils {
     public static final String TAG = "PushDemoActivity";
     public static final String RESPONSE_METHOD = "method";
     public static final String RESPONSE_CONTENT = "content";

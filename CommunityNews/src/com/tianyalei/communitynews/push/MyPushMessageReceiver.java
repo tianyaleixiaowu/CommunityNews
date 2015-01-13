@@ -8,7 +8,7 @@ import com.ab.http.wolf.GetDataCallBack;
 import com.ab.util.AbSharedUtil;
 import com.baidu.frontia.api.FrontiaPushMessageReceiver;
 import com.tianyalei.communitynews.MainActivity;
-import com.tianyalei.communitynews.utils.Utils;
+import com.tianyalei.communitynews.utils.BaiduPushUtils;
 import com.tianyalei.communitynews.utils.http.HttpUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -97,7 +97,7 @@ public class MyPushMessageReceiver extends FrontiaPushMessageReceiver {
 
         // 绑定成功，设置已绑定flag，可以有效的减少不必要的绑定请求
         if (errorCode == 0) {
-            Utils.setBind(context, true);
+            BaiduPushUtils.setBind(context, true);
         }
         // Demo更新界面展示代码，应用请在这里加入自己的处理逻辑
 //        updateContent(context, responseString);
@@ -270,7 +270,7 @@ public class MyPushMessageReceiver extends FrontiaPushMessageReceiver {
 
         // 解绑定成功，设置未绑定flag，
         if (errorCode == 0) {
-            Utils.setBind(context, false);
+            BaiduPushUtils.setBind(context, false);
         }
         // Demo更新界面展示代码，应用请在这里加入自己的处理逻辑
         updateContent(context, responseString);
@@ -278,7 +278,7 @@ public class MyPushMessageReceiver extends FrontiaPushMessageReceiver {
 
     private void updateContent(Context context, String content) {
         Log.d(TAG, "updateContent");
-        String logText = "" + Utils.logStringCache;
+        String logText = "" + BaiduPushUtils.logStringCache;
 
         if (!logText.equals("")) {
             logText += "\n";
@@ -288,7 +288,7 @@ public class MyPushMessageReceiver extends FrontiaPushMessageReceiver {
         logText += sDateFormat.format(new Date()) + ": ";
         logText += content;
 
-        Utils.logStringCache = logText;
+        BaiduPushUtils.logStringCache = logText;
 
         logText = "经平台系统分析，用户" + AbSharedUtil.getString(context, "userId") + "于" + new Date() + "发出紧急求助，地址不详。" + "相关紧急联络人已实时推送信息，平台监控人员已电话确认并赶往途中。";
 
