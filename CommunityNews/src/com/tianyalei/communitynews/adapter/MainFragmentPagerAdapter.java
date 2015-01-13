@@ -6,10 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import com.ab.fragment.AbFragment;
 import com.shizhefei.view.indicator.IndicatorViewPager;
 import com.tianyalei.communitynews.R;
 import com.tianyalei.communitynews.application.MyApplication;
+import com.tianyalei.communitynews.fragment.BaseFragment;
 import com.tianyalei.communitynews.fragment.MainFirstFragment;
 
 /**
@@ -44,7 +44,7 @@ public class MainFragmentPagerAdapter extends IndicatorViewPager.IndicatorFragme
 
     @Override
     public Fragment getFragmentForPage(int position) {
-        AbFragment fragment = null;
+        BaseFragment fragment = null;
         switch (position) {
             case 0:
                 fragment = new MainFirstFragment();

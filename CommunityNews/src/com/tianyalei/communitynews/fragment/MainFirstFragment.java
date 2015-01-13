@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import com.ab.fragment.AbFragment;
 import com.ab.http.AbRequestParams;
 import com.ab.view.pullview.AbPullToRefreshView;
 import com.tianyalei.communitynews.R;
@@ -15,7 +14,7 @@ import com.tianyalei.communitynews.application.MyApplication;
 /**
  * Created by wuwf on 2015/1/13.
  */
-public class MainFirstFragment extends AbFragment {
+public class MainFirstFragment extends BaseFragment {
     private MyApplication application;
     private Activity mActivity = null;
 //    private List<Article> mList = null;
