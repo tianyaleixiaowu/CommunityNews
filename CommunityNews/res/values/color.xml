@@ -9,4 +9,6 @@
     <color name = "tab_top_text_1">#aaa</color>
     <color name = "tab_top_text_2">#000</color>
     <color name = "white">#fff</color>
+
+    <color name = "gray_white">#ebebeb</color>
 </resources>
