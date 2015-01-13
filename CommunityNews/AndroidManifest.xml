@@ -33,6 +33,13 @@
                 android:screenOrientation = "portrait"
                 android:launchMode = "singleTask"
                 android:label = "@string/app_name">
+        </activity>
+
+        <activity
+                android:name = "com.tianyalei.communitynews.TabMainActivity"
+                android:screenOrientation = "portrait"
+                android:launchMode = "singleTask"
+                android:label = "@string/app_name">
             <intent-filter>
                 <action android:name = "android.intent.action.MAIN"/>
                 <category android:name = "android.intent.category.LAUNCHER"/>
