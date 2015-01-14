@@ -2,6 +2,7 @@ package com.tianyalei.communitynews.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -126,15 +127,15 @@ public class MainFirstFragment extends BaseFragment {
 //                mAbPullToRefreshView.onHeaderRefreshFinish();
 //
 //                // 模拟用，真是开发中需要直接调用run内的内容
-//                new Handler().postDelayed(new Runnable() {
-//
-//                    @Override
-//                    public void run() {
-//                        // 显示内容
-//                        showContentView();
-//                    }
-//
-//                }, 3000);
+                new Handler().postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        // 显示内容
+                        showContentView();
+                    }
+
+                }, 3000);
 //
 //            }
 //
