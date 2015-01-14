@@ -1,9 +1,9 @@
 package com.tianyalei.communitynews;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.view.KeyEvent;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.ab.util.AbToastUtil;
@@ -13,9 +13,6 @@ import com.shizhefei.view.indicator.Indicator;
 import com.shizhefei.view.indicator.IndicatorViewPager;
 import com.tianyalei.communitynews.adapter.MainFragmentPagerAdapter;
 import com.umeng.analytics.MobclickAgent;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * 带下导航栏
@@ -38,6 +35,7 @@ public class TabMainActivity extends FragmentActivity {
 	private ImageView mTitleRightImage;
 	@ViewInject(R.id.title)
 	private TextView mTitleText;
+	private boolean doubleBackToExitPressedOnce;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -74,35 +72,23 @@ public class TabMainActivity extends FragmentActivity {
 		super.onPause();
 	}
 
+
 	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			exitBy2Click();      //调用双击退出函数
+	public void onBackPressed() {
+		if (doubleBackToExitPressedOnce) {
+			super.onBackPressed();
+			return;
 		}
-		return false;
-	}
 
-	/**
-	 * 双击退出函数
-	 */
-	private static Boolean isExit = false;
+		this.doubleBackToExitPressedOnce = true;
+		AbToastUtil.showToast(this, "再按一次退出程序");
 
-	private void exitBy2Click() {
-		Timer tExit;
-		if (isExit == false) {
-			isExit = true; // 准备退出
-			AbToastUtil.showToast(this, "再按一次退出程序");
-			tExit = new Timer();
-			tExit.schedule(new TimerTask() {
-				@Override
-				public void run() {
-					isExit = false; // 取消退出
-				}
-			}, 2000); // 如果2秒钟内没有按下返回键，则启动定时器取消掉刚才执行的任务
+		new Handler().postDelayed(new Runnable() {
 
-		} else {
-			finish();
-			System.exit(0);
-		}
+			@Override
+			public void run() {
+				doubleBackToExitPressedOnce = false;
+			}
+		}, 2000);
 	}
 }
