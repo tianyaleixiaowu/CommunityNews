@@ -27,9 +27,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class MainFirstFragment extends LazyFragment {
     private Context mContext;
-    //    private List<Article> mList = null;
     private int currentPage = 1;
-    //    private ArticleListAdapter myListViewAdapter = null;
     private int total = 50;
     private int pageSize = 5;
     /**
@@ -149,10 +147,16 @@ public class MainFirstFragment extends LazyFragment {
         imageResId = new int[]{R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d, R.drawable.e};
         mImageViewList = new ArrayList<ImageView>();
         // 初始化图片资源
-        for (int i = 0; i < imageResId.length; i++) {
+        for (int anImageResId : imageResId) {
             ImageView imageView = new ImageView(mContext);
-            imageView.setImageResource(imageResId[i]);
+            imageView.setImageResource(anImageResId);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //TODO 首页banner图片广告点击响应
+                }
+            });
             mImageViewList.add(imageView);
         }
         dots = new ArrayList<View>();
