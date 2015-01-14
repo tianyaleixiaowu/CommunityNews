@@ -1,15 +1,28 @@
 package com.tianyalei.communitynews.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import com.ab.http.AbRequestParams;
 import com.ab.view.pullview.AbPullToRefreshView;
+import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.view.annotation.ViewInject;
 import com.tianyalei.communitynews.R;
+import com.tianyalei.communitynews.adapter.ImageViewPagerAdapter;
 import com.tianyalei.communitynews.application.MyApplication;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by wuwf on 2015/1/13.
@@ -17,13 +30,47 @@ import com.tianyalei.communitynews.application.MyApplication;
 public class MainFirstFragment extends BaseFragment {
     private MyApplication application;
     private Activity mActivity = null;
-//    private List<Article> mList = null;
+    //    private List<Article> mList = null;
     private AbPullToRefreshView mAbPullToRefreshView = null;
     private ListView mListView = null;
     private int currentPage = 1;
-//    private ArticleListAdapter myListViewAdapter = null;
+    //    private ArticleListAdapter myListViewAdapter = null;
     private int total = 50;
     private int pageSize = 5;
+    /**
+     * ViewPager
+     */
+    @ViewInject(R.id.banner_viewpager)
+    private ViewPager mViewPager;
+    /**
+     * 轮播图片集合
+     */
+    private List<ImageView> mImageViewList;
+
+    /**
+     * 图片ID集合
+     */
+    private int[] imageResId;
+    /**
+     * 当前图片索引
+     */
+    private int currentItem = 0;
+    /**
+     * 我也不知道是啥....
+     */
+    private ScheduledExecutorService mScheduledExecutorService;
+    /**
+     * 小点
+     */
+    private List<View> dots;
+    private Context mContext;
+    private View mView;
+    // 切换当前显示的图片
+    private Handler handler = new Handler() {
+        public void handleMessage(android.os.Message msg) {
+            mViewPager.setCurrentItem(currentItem);// 切换当前显示的图片
+        }
+    };
 
     @Override
     public View onCreateContentView(LayoutInflater inflater,
@@ -32,11 +79,13 @@ public class MainFirstFragment extends BaseFragment {
         mActivity = this.getActivity();
         application = (MyApplication) mActivity.getApplication();
 
-        View view = inflater.inflate(R.layout.pull_to_refresh_list, null);
+        mView = inflater.inflate(R.layout.pull_to_refresh_list, null);
         // 获取ListView对象
-        mAbPullToRefreshView = (AbPullToRefreshView) view
+        ViewUtils.inject(this, mView);
+
+        mAbPullToRefreshView = (AbPullToRefreshView) mView
                 .findViewById(R.id.mPullRefreshView);
-        mListView = (ListView) view.findViewById(R.id.mListView);
+        mListView = (ListView) mView.findViewById(R.id.mListView);
 
         // 设置监听器
         mAbPullToRefreshView
@@ -58,11 +107,9 @@ public class MainFirstFragment extends BaseFragment {
                 });
 
         // 设置进度条的样式
-        mAbPullToRefreshView.getHeaderView().setHeaderProgressBarDrawable(
-                this.getResources().getDrawable(R.drawable.progress_circular));
-        mAbPullToRefreshView.getFooterView().setFooterProgressBarDrawable(
-                this.getResources().getDrawable(R.drawable.progress_circular));
-
+        mAbPullToRefreshView.getHeaderView().setHeaderProgressBarDrawable(this.getResources().getDrawable(R.drawable.progress_circular));
+        mAbPullToRefreshView.getFooterView().setFooterProgressBarDrawable(this.getResources().getDrawable(R.drawable.progress_circular));
+        init();
         // ListView数据
 //        mList = new ArrayList<Article>();
 //
@@ -88,7 +135,7 @@ public class MainFirstFragment extends BaseFragment {
 
         });
 
-        return view;
+        return mView;
     }
 
     @Override
@@ -99,6 +146,45 @@ public class MainFirstFragment extends BaseFragment {
 
         this.setRefreshDrawable(R.drawable.ic_refresh);
         this.setRefreshMessage("请求出错，请重试");
+    }
+
+    /**
+     * 初始化
+     */
+    private void init() {
+        imageResId = new int[]{R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d, R.drawable.e};
+        mImageViewList = new ArrayList<ImageView>();
+        // 初始化图片资源
+        for (int i = 0; i < imageResId.length; i++) {
+            ImageView imageView = new ImageView(mActivity);
+            imageView.setImageResource(imageResId[i]);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            mImageViewList.add(imageView);
+        }
+        dots = new ArrayList<View>();
+        dots.add(mView.findViewById(R.id.v_dot0));
+        dots.add(mView.findViewById(R.id.v_dot1));
+        dots.add(mView.findViewById(R.id.v_dot2));
+        dots.add(mView.findViewById(R.id.v_dot3));
+        dots.add(mView.findViewById(R.id.v_dot4));
+        mViewPager.setAdapter(new ImageViewPagerAdapter(mImageViewList));// 设置填充ViewPager页面的适配器
+        // 设置一个监听器，当ViewPager中的页面改变时调用
+        mViewPager.setOnPageChangeListener(new MyPageChangeListener());
+    }
+
+    @Override
+    public void onStart() {
+        mScheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+        // 当Activity显示出来后，每两秒钟切换一次图片显示
+        mScheduledExecutorService.scheduleAtFixedRate(new ScrollTask(), 1, 2, TimeUnit.SECONDS);
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        // 当Activity不可见的时候停止切换
+        mScheduledExecutorService.shutdown();
+        super.onStop();
     }
 
     /**
@@ -126,15 +212,15 @@ public class MainFirstFragment extends BaseFragment {
 //                mAbPullToRefreshView.onHeaderRefreshFinish();
 //
 //                // 模拟用，真是开发中需要直接调用run内的内容
-//                new Handler().postDelayed(new Runnable() {
-//
-//                    @Override
-//                    public void run() {
-//                        // 显示内容
-//                        showContentView();
-//                    }
-//
-//                }, 3000);
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                // 显示内容
+                showContentView();
+            }
+
+        }, 3000);
 //
 //            }
 //
@@ -177,4 +263,43 @@ public class MainFirstFragment extends BaseFragment {
 //        });
     }
 
+    /**
+     * 执行切换任务
+     */
+    private class ScrollTask implements Runnable {
+        public void run() {
+            synchronized (mViewPager) {
+                currentItem = (currentItem + 1) % mImageViewList.size();
+                handler.obtainMessage().sendToTarget(); // 通过Handler切换图片
+            }
+        }
+    }
+
+    /**
+     * 当ViewPager中页面的状态发生改变时调用
+     *
+     * @author Administrator
+     */
+    private class MyPageChangeListener implements ViewPager.OnPageChangeListener {
+        private int oldPosition = 0;
+
+        /**
+         * This method will be invoked when a new page becomes selected.
+         * position: Position index of the new selected page.
+         */
+        public void onPageSelected(int position) {
+            currentItem = position;
+            dots.get(oldPosition).setBackgroundResource(R.drawable.dot_normal);
+            dots.get(position).setBackgroundResource(R.drawable.dot_focused);
+            oldPosition = position;
+        }
+
+        public void onPageScrollStateChanged(int arg0) {
+
+        }
+
+        public void onPageScrolled(int arg0, float arg1, int arg2) {
+
+        }
+    }
 }

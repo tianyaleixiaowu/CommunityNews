@@ -1,17 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.ab.view.pullview.AbPullToRefreshView 
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/mPullRefreshView"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/gray_white">
+<RelativeLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+                android:layout_width = "match_parent"
+                android:background = "@color/gray_white"
+                android:layout_height = "match_parent">
 
-    <ListView
-        android:id="@+id/mListView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:cacheColorHint="#00000000"
-        android:divider="@drawable/list_divider"
-        android:dividerHeight="1px" />
+    <FrameLayout
+            android:layout_width = "match_parent"
+            android:layout_alignParentTop = "true"
+            android:id = "@+id/frame_layout"
+            android:layout_height = "140dip">
 
-</com.ab.view.pullview.AbPullToRefreshView>
+        <android.support.v4.view.ViewPager
+                android:id = "@+id/banner_viewpager"
+                android:layout_width = "fill_parent"
+                android:layout_height = "fill_parent"/>
+
+        <LinearLayout
+                android:layout_width = "fill_parent"
+                android:layout_height = "35dip"
+                android:layout_gravity = "bottom"
+                android:background = "#20000000"
+                android:gravity = "center"
+                android:orientation = "vertical">
+
+            <LinearLayout
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_marginTop = "3dip"
+                    android:gravity = "center">
+
+                <View
+                        android:id = "@+id/v_dot0"
+                        style = "@style/dot_style"
+                        android:background = "@drawable/dot_focused"/>
+
+                <View
+                        android:id = "@+id/v_dot1"
+                        style = "@style/dot_style"/>
+
+                <View
+                        android:id = "@+id/v_dot2"
+                        style = "@style/dot_style"/>
+
+                <View
+                        android:id = "@+id/v_dot3"
+                        style = "@style/dot_style"/>
+
+                <View
+                        android:id = "@+id/v_dot4"
+                        style = "@style/dot_style"/>
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+    <com.ab.view.pullview.AbPullToRefreshView
+            android:id = "@+id/mPullRefreshView"
+
+            android:layout_below = "@+id/frame_layout"
+            android:layout_width = "fill_parent"
+            android:layout_height = "fill_parent"
+            >
+
+        <ListView
+                android:id = "@+id/mListView"
+                android:layout_width = "fill_parent"
+                android:layout_height = "fill_parent"
+                android:cacheColorHint = "#00000000"
+                android:divider = "@drawable/list_divider"
+                android:dividerHeight = "1px"/>
+
+    </com.ab.view.pullview.AbPullToRefreshView>
+</RelativeLayout>
