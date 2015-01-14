@@ -33,7 +33,7 @@ public class BaseFragment extends Fragment {
 	private TextView mRefreshTextView = null;
 	private ImageView mRefreshImageView = null;
 	private View mIndeterminateView = null;
-	private int mBackgroundColor = Color.parseColor("#88838B8B");
+	private int mBackgroundColor = Color.parseColor("#ffffff");
 	private AbFragmentOnLoadListener mAbFragmentOnLoadListener = null;
 
 	/**

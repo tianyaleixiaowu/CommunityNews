@@ -16,7 +16,6 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.tianyalei.communitynews.R;
 import com.tianyalei.communitynews.adapter.ImageViewPagerAdapter;
-import com.tianyalei.communitynews.application.MyApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +26,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by wuwf on 2015/1/13.
  */
-public class MainFirstFragment extends BaseFragment {
-    private MyApplication application;
+public class MainFirstFragment extends LazyFragment {
     private Activity mActivity = null;
     //    private List<Article> mList = null;
     private AbPullToRefreshView mAbPullToRefreshView = null;
@@ -73,11 +71,15 @@ public class MainFirstFragment extends BaseFragment {
     };
 
     @Override
-    public View onCreateContentView(LayoutInflater inflater,
+    protected void lazyLoad() {
+
+    }
+
+    @Override
+    public View doCreateView(LayoutInflater inflater,
                                     ViewGroup container, Bundle savedInstanceState) {
 
         mActivity = this.getActivity();
-        application = (MyApplication) mActivity.getApplication();
 
         mView = inflater.inflate(R.layout.pull_to_refresh_list, null);
         // 获取ListView对象
@@ -125,28 +127,19 @@ public class MainFirstFragment extends BaseFragment {
 //        });
 
         // 加载数据必须
-        this.setAbFragmentOnLoadListener(new AbFragmentOnLoadListener() {
+//        this.setAbFragmentOnLoadListener(new AbFragmentOnLoadListener() {
+//
+//            @Override
+//            public void onLoad() {
+//                // 第一次下载数据
+//                refreshTask();
+//            }
 
-            @Override
-            public void onLoad() {
-                // 第一次下载数据
-                refreshTask();
-            }
-
-        });
+//        });
 
         return mView;
     }
 
-    @Override
-    public void setResource() {
-        // 设置加载的资源
-        this.setLoadDrawable(R.drawable.ic_load);
-        this.setLoadMessage("正在查询,请稍候");
-
-        this.setRefreshDrawable(R.drawable.ic_refresh);
-        this.setRefreshMessage("请求出错，请重试");
-    }
 
     /**
      * 初始化
@@ -212,15 +205,15 @@ public class MainFirstFragment extends BaseFragment {
 //                mAbPullToRefreshView.onHeaderRefreshFinish();
 //
 //                // 模拟用，真是开发中需要直接调用run内的内容
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                // 显示内容
-                showContentView();
-            }
-
-        }, 3000);
+//        new Handler().postDelayed(new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                // 显示内容
+//                showContentView();
+//            }
+//
+//        }, 3000);
 //
 //            }
 //
