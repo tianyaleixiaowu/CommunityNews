@@ -12,7 +12,6 @@ import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 import com.ab.activity.AbActivity;
 import com.baidu.android.pushservice.CustomPushNotificationBuilder;
 import com.baidu.android.pushservice.PushConstants;
@@ -33,7 +32,7 @@ public class MainActivity extends AbActivity {
     /**
      * ViewPager
      */
-    @ViewInject(R.id.vp)
+    @ViewInject(R.id.banner_viewpager)
     private ViewPager mViewPager;
     /**
      * 轮播图片集合
@@ -47,11 +46,6 @@ public class MainActivity extends AbActivity {
      * 图片ID集合
      */
     private int[] imageResId;
-    /**
-     * 标题textview
-     */
-    @ViewInject(R.id.tv_title)
-    private TextView mTvTitle;
     /**
      * 当前图片索引
      */
@@ -112,7 +106,6 @@ public class MainActivity extends AbActivity {
         dots.add(findViewById(R.id.v_dot2));
         dots.add(findViewById(R.id.v_dot3));
         dots.add(findViewById(R.id.v_dot4));
-        mTvTitle.setText(titles[0]);//
         mViewPager.setAdapter(new ImageViewPagerAdapter(mImageViewList));// 设置填充ViewPager页面的适配器
         // 设置一个监听器，当ViewPager中的页面改变时调用
         mViewPager.setOnPageChangeListener(new MyPageChangeListener());
@@ -256,7 +249,6 @@ public class MainActivity extends AbActivity {
          */
         public void onPageSelected(int position) {
             currentItem = position;
-            mTvTitle.setText(titles[position]);
             dots.get(oldPosition).setBackgroundResource(R.drawable.dot_normal);
             dots.get(position).setBackgroundResource(R.drawable.dot_focused);
             oldPosition = position;
