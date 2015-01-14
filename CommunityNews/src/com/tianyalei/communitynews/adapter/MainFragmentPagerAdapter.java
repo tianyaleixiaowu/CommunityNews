@@ -1,6 +1,5 @@
 package com.tianyalei.communitynews.adapter;
 
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +8,7 @@ import android.widget.TextView;
 import com.shizhefei.view.indicator.IndicatorViewPager;
 import com.tianyalei.communitynews.R;
 import com.tianyalei.communitynews.application.MyApplication;
-import com.tianyalei.communitynews.fragment.BaseFragment;
+import com.tianyalei.communitynews.fragment.LazyFragment;
 import com.tianyalei.communitynews.fragment.MainFirstFragment;
 
 /**
@@ -43,8 +42,8 @@ public class MainFragmentPagerAdapter extends IndicatorViewPager.IndicatorFragme
     }
 
     @Override
-    public Fragment getFragmentForPage(int position) {
-        BaseFragment fragment = null;
+    public LazyFragment getFragmentForPage(int position) {
+        LazyFragment fragment = null;
         switch (position) {
             case 0:
                 fragment = new MainFirstFragment();
