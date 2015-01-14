@@ -1,6 +1,5 @@
 package com.tianyalei.communitynews.fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,10 +26,8 @@ import java.util.concurrent.TimeUnit;
  * Created by wuwf on 2015/1/13.
  */
 public class MainFirstFragment extends LazyFragment {
-    private Activity mActivity = null;
+    private Context mContext;
     //    private List<Article> mList = null;
-    private AbPullToRefreshView mAbPullToRefreshView = null;
-    private ListView mListView = null;
     private int currentPage = 1;
     //    private ArticleListAdapter myListViewAdapter = null;
     private int total = 50;
@@ -40,6 +37,16 @@ public class MainFirstFragment extends LazyFragment {
      */
     @ViewInject(R.id.banner_viewpager)
     private ViewPager mViewPager;
+    /**
+     * AbPullToRefreshView
+     */
+    @ViewInject(R.id.mPullRefreshView)
+    private AbPullToRefreshView mAbPullToRefreshView;
+    /**
+     * Listview
+     */
+    @ViewInject(R.id.mListView)
+    private ListView mListView;
     /**
      * 轮播图片集合
      */
@@ -61,7 +68,6 @@ public class MainFirstFragment extends LazyFragment {
      * 小点
      */
     private List<View> dots;
-    private Context mContext;
     private View mView;
     // 切换当前显示的图片
     private Handler handler = new Handler() {
@@ -78,16 +84,11 @@ public class MainFirstFragment extends LazyFragment {
     @Override
     public View doCreateView(LayoutInflater inflater,
                                     ViewGroup container, Bundle savedInstanceState) {
-
-        mActivity = this.getActivity();
+        mContext = getActivity();
 
         mView = inflater.inflate(R.layout.pull_to_refresh_list, null);
         // 获取ListView对象
         ViewUtils.inject(this, mView);
-
-        mAbPullToRefreshView = (AbPullToRefreshView) mView
-                .findViewById(R.id.mPullRefreshView);
-        mListView = (ListView) mView.findViewById(R.id.mListView);
 
         // 设置监听器
         mAbPullToRefreshView
@@ -149,7 +150,7 @@ public class MainFirstFragment extends LazyFragment {
         mImageViewList = new ArrayList<ImageView>();
         // 初始化图片资源
         for (int i = 0; i < imageResId.length; i++) {
-            ImageView imageView = new ImageView(mActivity);
+            ImageView imageView = new ImageView(mContext);
             imageView.setImageResource(imageResId[i]);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             mImageViewList.add(imageView);
