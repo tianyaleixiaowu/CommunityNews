@@ -110,7 +110,10 @@ public class MainFirstFragment extends LazyFragment {
         // 设置进度条的样式
         mAbPullToRefreshView.getHeaderView().setHeaderProgressBarDrawable(this.getResources().getDrawable(R.drawable.progress_circular));
         mAbPullToRefreshView.getFooterView().setFooterProgressBarDrawable(this.getResources().getDrawable(R.drawable.progress_circular));
-        init();
+        initBanner();
+        mScheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+        // 当Activity显示出来后，每两秒钟切换一次图片显示
+        mScheduledExecutorService.scheduleAtFixedRate(new ScrollTask(), 1, 2, TimeUnit.SECONDS);
         // ListView数据
 //        mList = new ArrayList<Article>();
 //
@@ -143,7 +146,7 @@ public class MainFirstFragment extends LazyFragment {
     /**
      * 初始化
      */
-    private void init() {
+    private void initBanner() {
         imageResId = new int[]{R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d, R.drawable.e};
         mImageViewList = new ArrayList<ImageView>();
         // 初始化图片资源
@@ -168,21 +171,6 @@ public class MainFirstFragment extends LazyFragment {
         mViewPager.setAdapter(new ImageViewPagerAdapter(mImageViewList));// 设置填充ViewPager页面的适配器
         // 设置一个监听器，当ViewPager中的页面改变时调用
         mViewPager.setOnPageChangeListener(new MyPageChangeListener());
-    }
-
-    @Override
-    public void onStart() {
-        mScheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
-        // 当Activity显示出来后，每两秒钟切换一次图片显示
-        mScheduledExecutorService.scheduleAtFixedRate(new ScrollTask(), 1, 2, TimeUnit.SECONDS);
-        super.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        // 当Activity不可见的时候停止切换
-        mScheduledExecutorService.shutdown();
-        super.onStop();
     }
 
     /**
