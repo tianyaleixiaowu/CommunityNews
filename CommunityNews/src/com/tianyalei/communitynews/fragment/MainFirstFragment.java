@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 import com.ab.http.AbRequestParams;
+import com.ab.image.AbImageLoader;
 import com.ab.view.pullview.AbPullToRefreshView;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -53,7 +54,7 @@ public class MainFirstFragment extends LazyFragment {
     /**
      * 图片ID集合
      */
-    private int[] imageResId;
+    private String[] imageUrls;
     /**
      * 当前图片索引
      */
@@ -67,6 +68,7 @@ public class MainFirstFragment extends LazyFragment {
      */
     private List<View> dots;
     private View mView;
+    private AbImageLoader mAbImageLoader;
     // 切换当前显示的图片
     private Handler handler = new Handler() {
         public void handleMessage(android.os.Message msg) {
@@ -83,7 +85,10 @@ public class MainFirstFragment extends LazyFragment {
     public View doCreateView(LayoutInflater inflater,
                                     ViewGroup container, Bundle savedInstanceState) {
         mContext = getActivity();
-
+        mAbImageLoader = new AbImageLoader(mContext);
+        mAbImageLoader.setEmptyImage(R.drawable.a);
+        mAbImageLoader.setErrorImage(R.drawable.a);
+        mAbImageLoader.setLoadingImage(R.drawable.a);
         mView = inflater.inflate(R.layout.pull_to_refresh_list, null);
         // 获取ListView对象
         ViewUtils.inject(this, mView);
@@ -147,12 +152,12 @@ public class MainFirstFragment extends LazyFragment {
      * 初始化
      */
     private void initBanner() {
-        imageResId = new int[]{R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d, R.drawable.e};
+        imageUrls = new String[]{"http://img5.imgtn.bdimg.com/it/u=2501461001,3027115012&fm=23&gp=0.jpg", "http://img4.imgtn.bdimg.com/it/u=1903407360,396224632&fm=90&gp=0.jpg", "http://img0.imgtn.bdimg.com/it/u=1709132177,2851691885&fm=23&gp=0.jpg", "http://img5.imgtn.bdimg.com/it/u=943320339,2732010194&fm=23&gp=0.jpg", "http://img1.imgtn.bdimg.com/it/u=3701920778,67538327&fm=21&gp=0.jpg"};
         mImageViewList = new ArrayList<ImageView>();
         // 初始化图片资源
-        for (int anImageResId : imageResId) {
+        for (String imageUrl : imageUrls) {
             ImageView imageView = new ImageView(mContext);
-            imageView.setImageResource(anImageResId);
+            mAbImageLoader.display(imageView, imageUrl);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
