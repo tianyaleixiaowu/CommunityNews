@@ -5,4 +5,5 @@
          screen margins) for sw600dp devices (e.g. 7" tablets) here.
     -->
     <dimen name = "title_height">45dp</dimen>
+    <dimen name = "listview_item_height">45dp</dimen>
 </resources>

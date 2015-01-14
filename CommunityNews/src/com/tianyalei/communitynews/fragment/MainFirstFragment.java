@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import com.ab.adapter.AbCommonAdapter;
 import com.ab.http.AbRequestParams;
 import com.ab.image.AbImageLoader;
 import com.ab.view.pullview.AbPullToRefreshView;
@@ -16,6 +17,7 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.tianyalei.communitynews.R;
 import com.tianyalei.communitynews.adapter.ImageViewPagerAdapter;
+import com.tianyalei.communitynews.adapter.MainFirstFragmentListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +91,7 @@ public class MainFirstFragment extends LazyFragment {
         mAbImageLoader.setEmptyImage(R.drawable.a);
         mAbImageLoader.setErrorImage(R.drawable.a);
         mAbImageLoader.setLoadingImage(R.drawable.a);
-        mView = inflater.inflate(R.layout.pull_to_refresh_list, null);
+        mView = inflater.inflate(R.layout.main_first_fragment, null);
         // 获取ListView对象
         ViewUtils.inject(this, mView);
 
@@ -102,47 +104,23 @@ public class MainFirstFragment extends LazyFragment {
                         refreshTask();
                     }
                 });
-        mAbPullToRefreshView
-                .setOnFooterLoadListener(new AbPullToRefreshView.OnFooterLoadListener() {
-
-                    @Override
-                    public void onFooterLoad(AbPullToRefreshView view) {
-                        loadMoreTask();
-
-                    }
-                });
+        mAbPullToRefreshView.setLoadMoreEnable(false);
 
         // 设置进度条的样式
         mAbPullToRefreshView.getHeaderView().setHeaderProgressBarDrawable(this.getResources().getDrawable(R.drawable.progress_circular));
-        mAbPullToRefreshView.getFooterView().setFooterProgressBarDrawable(this.getResources().getDrawable(R.drawable.progress_circular));
+//        mAbPullToRefreshView.getFooterView().setFooterProgressBarDrawable(this.getResources().getDrawable(R.drawable.progress_circular));
+
+
         initBanner();
-        mScheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
-        // 当Activity显示出来后，每两秒钟切换一次图片显示
-        mScheduledExecutorService.scheduleAtFixedRate(new ScrollTask(), 1, 2, TimeUnit.SECONDS);
+
         // ListView数据
-//        mList = new ArrayList<Article>();
-//
-//        // 使用自定义的Adapter
-//        myListViewAdapter = new ArticleListAdapter(mActivity, mList);
-//        mListView.setAdapter(myListViewAdapter);
-//        // item被点击事件
-//        mListView.setOnItemClickListener(new OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view,
-//                                    int position, long id) {
-//            }
-//        });
-
-        // 加载数据必须
-//        this.setAbFragmentOnLoadListener(new AbFragmentOnLoadListener() {
-//
-//            @Override
-//            public void onLoad() {
-//                // 第一次下载数据
-//                refreshTask();
-//            }
-
-//        });
+        List mList = new ArrayList<String>();
+        mList.add("1");
+        mList.add("1");
+        mList.add("1");
+        mList.add("1");
+        AbCommonAdapter adapter = new MainFirstFragmentListAdapter(mContext, mList);
+        mListView.setAdapter(adapter);
 
         return mView;
     }
@@ -176,6 +154,11 @@ public class MainFirstFragment extends LazyFragment {
         mViewPager.setAdapter(new ImageViewPagerAdapter(mImageViewList));// 设置填充ViewPager页面的适配器
         // 设置一个监听器，当ViewPager中的页面改变时调用
         mViewPager.setOnPageChangeListener(new MyPageChangeListener());
+
+
+        mScheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+        // 当Activity显示出来后，每两秒钟切换一次图片显示
+        mScheduledExecutorService.scheduleAtFixedRate(new ScrollTask(), 1, 2, TimeUnit.SECONDS);
     }
 
     /**
@@ -188,41 +171,6 @@ public class MainFirstFragment extends LazyFragment {
         params.put("cityCode", "11");
         params.put("pageSize", String.valueOf(pageSize));
         params.put("toPageNo", String.valueOf(currentPage));
-        // 下载网络数据
-//        NetworkWeb web = NetworkWeb.newInstance(mActivity);
-//        web.findLogList(params, new AbHttpListener() {
-//
-//            @Override
-//            public void onSuccess(List<?> newList) {
-//                mList.clear();
-//                if (newList != null && newList.size() > 0) {
-//                    mList.addAll((List<Article>) newList);
-//                    myListViewAdapter.notifyDataSetChanged();
-//                    newList.clear();
-//                }
-//                mAbPullToRefreshView.onHeaderRefreshFinish();
-//
-//                // 模拟用，真是开发中需要直接调用run内的内容
-//        new Handler().postDelayed(new Runnable() {
-//
-//            @Override
-//            public void run() {
-//                // 显示内容
-//                showContentView();
-//            }
-//
-//        }, 3000);
-//
-//            }
-//
-//            @Override
-//            public void onFailure(String content) {
-//                AbToastUtil.showToast(mActivity, content);
-//                // 显示重试的框
-//                showRefreshView();
-//            }
-//
-//        });
     }
 
     public void loadMoreTask() {
