@@ -158,7 +158,7 @@ public class MainFirstFragment extends LazyFragment {
 
         mScheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
         // 当Activity显示出来后，每两秒钟切换一次图片显示
-        mScheduledExecutorService.scheduleAtFixedRate(new ScrollTask(), 1, 2, TimeUnit.SECONDS);
+        mScheduledExecutorService.scheduleAtFixedRate(new ScrollTask(), 1, 4, TimeUnit.SECONDS);
     }
 
     /**
