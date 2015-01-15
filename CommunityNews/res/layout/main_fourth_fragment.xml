@@ -159,28 +159,67 @@
                     android:layout_height = "wrap_content"
                     android:layout_marginTop = "-1dp"
                     android:orientation = "vertical"
-                    android:paddingBottom = "8dp"
                     android:background = "#F7F4F0">
 
                 <TextView
                         android:layout_width = "wrap_content"
                         android:layout_height = "wrap_content"
-                        android:layout_marginLeft = "13dp"
-                        android:layout_marginTop = "13dp"
                         android:singleLine = "true"
+                        android:layout_margin = "10dp"
                         android:ellipsize = "end"
-                        android:text = "TA推荐的好书"
-                        android:textSize = "12sp"
+                        android:text = "设置"
+                        android:textSize = "20dp"
                         android:textColor = "#A1A1A1"/>
 
-                <TableLayout
-                        android:id = "@+id/table_layout"
+                    <TextView
                         android:layout_width = "match_parent"
-                        android:layout_height = "wrap_content"
-                        android:layout_marginTop = "5dp"
-                        android:layout_marginLeft = "8dp"
-                        android:layout_marginRight = "8dp"
-                        android:background = "@drawable/card_whole"/>
+                        android:background = "@color/text_black"
+                        android:layout_height = "1px"/>
+
+                    <TextView
+                            android:id = "@+id/feedback_text_view"
+                            android:layout_width = "match_parent"
+                            android:text = "意见反馈"
+                            android:paddingTop = "10dp"
+                            android:paddingBottom = "10dp"
+                            style = "@style/common_black_18_text"
+                            android:paddingLeft = "10dp"
+                            android:layout_height = "wrap_content"/>
+
+                    <TextView
+                            android:layout_width = "match_parent"
+                            android:background = "@color/text_black"
+                            android:layout_height = "1px"/>
+
+                    <TextView
+                            android:layout_width = "match_parent"
+                            android:id = "@+id/update_text_view"
+                            android:text = "检查更新"
+                            android:paddingTop = "10dp"
+                            android:paddingBottom = "10dp"
+                            style = "@style/common_black_18_text"
+                            android:paddingLeft = "10dp"
+                            android:layout_height = "wrap_content"/>
+
+                    <TextView
+                            android:layout_width = "match_parent"
+                            android:background = "@color/text_black"
+                            android:layout_height = "1px"/>
+
+                    <TextView
+                            android:id = "@+id/about_text_view"
+                            android:layout_width = "match_parent"
+                            android:text = "关于"
+                            android:paddingTop = "10dp"
+                            android:paddingBottom = "10dp"
+                            style = "@style/common_black_18_text"
+                            android:paddingLeft = "10dp"
+                            android:layout_height = "wrap_content"/>
+
+                    <TextView
+                            android:layout_width = "match_parent"
+                            android:background = "@color/text_black"
+                            android:layout_height = "1px"/>
             </LinearLayout>
         </LinearLayout>
     </com.tianyalei.communitynews.view.PullScrollView>
