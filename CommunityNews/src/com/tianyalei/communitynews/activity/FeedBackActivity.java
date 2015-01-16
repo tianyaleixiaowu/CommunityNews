@@ -1,4 +1,4 @@
-package com.tianyalei.communitynews;
+package com.tianyalei.communitynews.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,10 +6,11 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
+import com.ab.util.AbToastUtil;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
+import com.tianyalei.communitynews.R;
 import com.tianyalei.communitynews.adapter.MyReplyListAdapter;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.FeedbackAgent;
@@ -41,7 +42,7 @@ public class FeedBackActivity extends Activity {
     public void send(View v) {
         String con = et_reply.getText().toString().trim();
         if (TextUtils.isEmpty(con)) {
-            Toast.makeText(FeedBackActivity.this, "说点什么吧", Toast.LENGTH_SHORT).show();
+            AbToastUtil.showToast(this, "输入您的建议吧");
             return;
         }
         MobclickAgent.onEvent(this, "feedback_submit");

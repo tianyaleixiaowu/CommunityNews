@@ -35,7 +35,7 @@
                 android:label = "@string/app_name">
         </activity>
         <activity
-                android:name = ".FeedBackActivity"
+                android:name = ".activity.FeedBackActivity"
                 android:screenOrientation = "portrait"
                 android:launchMode = "singleTask"
                 android:label = "@string/app_name">
