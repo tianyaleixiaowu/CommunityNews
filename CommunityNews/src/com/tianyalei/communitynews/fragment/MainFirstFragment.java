@@ -7,9 +7,9 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import com.ab.adapter.AbCommonAdapter;
 import com.ab.http.AbRequestParams;
 import com.ab.image.AbImageLoader;
 import com.ab.view.pullview.AbPullToRefreshView;
@@ -17,9 +17,9 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.tianyalei.communitynews.R;
 import com.tianyalei.communitynews.adapter.ImageViewPagerAdapter;
-import com.tianyalei.communitynews.adapter.MainFirstFragmentListAdapter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -114,13 +114,19 @@ public class MainFirstFragment extends LazyFragment {
         initBanner();
 
         // ListView数据
-        List mList = new ArrayList<String>();
-        mList.add("1");
-        mList.add("1");
-        mList.add("1");
-        mList.add("1");
-        AbCommonAdapter adapter = new MainFirstFragmentListAdapter(mContext, mList);
-        mListView.setAdapter(adapter);
+//        List mList = new ArrayList<String>();
+//        mList.add("1");
+//        mList.add("1");
+//        mList.add("1");
+//        mList.add("1");
+//        AbCommonAdapter adapter = new MainFirstFragmentListAdapter(mContext, mList);
+//        mListView.setAdapter(adapter);
+        mListView.setAdapter(new ArrayAdapter<String>(mContext,
+                android.R.layout.simple_list_item_1, new ArrayList<String>(
+                Arrays.asList("Hello", "World", "Welcome", "Java",
+                        "Android", "Lucene", "C++", "C#", "HTML",
+                        "Welcome", "Java", "Android", "Lucene", "C++",
+                        "C#", "HTML"))));
 
         return mView;
     }
