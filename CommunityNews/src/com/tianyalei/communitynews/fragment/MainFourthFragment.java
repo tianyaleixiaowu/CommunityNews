@@ -1,19 +1,15 @@
 package com.tianyalei.communitynews.fragment;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 import android.widget.Toast;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.tianyalei.communitynews.R;
 import com.tianyalei.communitynews.view.PullScrollView;
 
@@ -27,8 +23,23 @@ public class MainFourthFragment extends LazyFragment implements PullScrollView.O
     private PullScrollView mScrollView;
     @ViewInject(R.id.background_img)
     private ImageView mHeadImg;
-    @ViewInject(R.id.table_layout)
-    private TableLayout mMainLayout;
+
+    @OnClick({R.id.feedback_text_view, R.id.update_text_view, R.id.about_text_view})
+    private void click(View view) {
+        switch (view.getId()) {
+            case R.id.feedback_text_view:
+                Toast.makeText(mContext, "意见反馈", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.update_text_view:
+                Toast.makeText(mContext, "检查更新", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.about_text_view:
+                Toast.makeText(mContext, "关于", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
+    }
 
     @Override
     protected void lazyLoad() {
@@ -42,7 +53,6 @@ public class MainFourthFragment extends LazyFragment implements PullScrollView.O
         ViewUtils.inject(this, mView);
         mScrollView.setHeader(mHeadImg);
         mScrollView.setOnTurnListener(this);
-        showTable();
         return mView;
     }
 
@@ -51,38 +61,4 @@ public class MainFourthFragment extends LazyFragment implements PullScrollView.O
 
     }
 
-    public void showTable() {
-        TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(
-                TableRow.LayoutParams.MATCH_PARENT,
-                TableRow.LayoutParams.WRAP_CONTENT);
-        layoutParams.gravity = Gravity.CENTER;
-        layoutParams.leftMargin = 30;
-        layoutParams.bottomMargin = 10;
-        layoutParams.topMargin = 10;
-
-        for (int i = 0; i < 30; i++) {
-            TableRow tableRow = new TableRow(mContext);
-            TextView textView = new TextView(mContext);
-            textView.setText("Test pull down scroll view " + i);
-            textView.setTextSize(20);
-            textView.setPadding(15, 15, 15, 15);
-
-            tableRow.addView(textView, layoutParams);
-            if (i % 2 != 0) {
-                tableRow.setBackgroundColor(Color.LTGRAY);
-            } else {
-                tableRow.setBackgroundColor(Color.WHITE);
-            }
-
-            final int n = i;
-            tableRow.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(mContext, "Click item " + n, Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            mMainLayout.addView(tableRow);
-        }
-    }
 }
