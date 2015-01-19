@@ -11,6 +11,8 @@ import com.tianyalei.communitynews.application.MyApplication;
 import com.tianyalei.communitynews.fragment.LazyFragment;
 import com.tianyalei.communitynews.fragment.MainFirstFragment;
 import com.tianyalei.communitynews.fragment.MainFourthFragment;
+import com.tianyalei.communitynews.fragment.MainSecondFragment;
+import com.tianyalei.communitynews.fragment.MainThirdFragment;
 
 /**
  * Created by wuwf on 2015/1/13.
@@ -50,9 +52,15 @@ public class MainFragmentPagerAdapter extends IndicatorViewPager.IndicatorFragme
                 fragment = new MainFirstFragment();
 
                 break;
+            case 1:
+                fragment = new MainSecondFragment();
+                break;
+            case 2:
+                fragment = new MainThirdFragment();
+                break;
             case 3:
-
                 fragment = new MainFourthFragment();
+                break;
             default:
                 break;
         }

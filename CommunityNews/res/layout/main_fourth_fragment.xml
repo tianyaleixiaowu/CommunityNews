@@ -15,8 +15,9 @@
             android:scaleType = "fitXY"
             android:src = "@drawable/scrollview_header"/>
 
-    <com.tianyalei.communitynews.view.PullScrollView
+        <com.ab.view.pullscrollview.PullScrollView
             android:id = "@+id/scroll_view"
+            android:scrollbars = "none"
             android:layout_width = "match_parent"
             android:layout_height = "match_parent"
             app:headerHeight = "300dp"
@@ -222,6 +223,6 @@
                             android:layout_height = "1px"/>
             </LinearLayout>
         </LinearLayout>
-    </com.tianyalei.communitynews.view.PullScrollView>
+        </com.ab.view.pullscrollview.PullScrollView>
 
 </RelativeLayout>
