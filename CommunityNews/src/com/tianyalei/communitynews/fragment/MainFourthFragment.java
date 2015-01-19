@@ -49,7 +49,7 @@ public class MainFourthFragment extends LazyFragment implements PullScrollView.O
     @Override
     protected View doCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mContext = getActivity();
-        mView = inflater.inflate(R.layout.activity_pull_scroll_view, null);
+        mView = inflater.inflate(R.layout.main_fourth_fragment, null);
         ViewUtils.inject(this, mView);
         mScrollView.setHeader(mHeadImg);
         mScrollView.setOnTurnListener(this);
