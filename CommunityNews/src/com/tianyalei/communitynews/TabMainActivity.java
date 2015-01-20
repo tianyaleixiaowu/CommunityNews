@@ -33,7 +33,7 @@ public class TabMainActivity extends FragmentActivity {
 	private ImageView mTitleLeftImage;
 	@ViewInject(R.id.title_right)
 	private ImageView mTitleRightImage;
-	@ViewInject(R.id.title)
+	@ViewInject(R.id.rss_title)
 	private TextView mTitleText;
 	private boolean doubleBackToExitPressedOnce;
 
