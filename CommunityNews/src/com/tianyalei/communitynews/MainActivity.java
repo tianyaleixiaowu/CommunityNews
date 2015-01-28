@@ -83,7 +83,7 @@ public class MainActivity extends AbActivity {
      * 初始化
      */
     private void init() {
-        imageResId = new int[]{R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d, R.drawable.e};
+        imageResId = new int[]{R.drawable.a, R.drawable.a, R.drawable.a, R.drawable.a, R.drawable.a};
         titles = new String[imageResId.length];
         titles[0] = "巩俐不低俗，我就不能低俗";
         titles[1] = "扑树又回来啦！再唱经典老歌引万人大合唱";

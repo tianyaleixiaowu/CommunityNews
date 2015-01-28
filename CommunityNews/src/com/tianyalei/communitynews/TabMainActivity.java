@@ -53,11 +53,11 @@ public class TabMainActivity extends FragmentActivity {
 		IndicatorViewPager indicatorViewPager = new IndicatorViewPager(mButtonIndicator, mMainViewPager);
 		indicatorViewPager.setAdapter(new MainFragmentPagerAdapter(getSupportFragmentManager()));
 		// 禁止viewpager的滑动事件
-		mMainViewPager.setCanScroll(false);
+		mMainViewPager.setCanScroll(true);
 		// 设置viewpager保留界面不重新加载的页面数量
 		mMainViewPager.setOffscreenPageLimit(4);
 		// 默认是1,，自动预加载左右两边的界面。设置viewpager预加载数为0。只加载加载当前界面。
-		mMainViewPager.setPrepareNumber(0);
+		mMainViewPager.setPrepareNumber(1);
 	}
 
 	@Override

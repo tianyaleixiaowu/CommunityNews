@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+                android:layout_width = "fill_parent"
+                android:layout_height = "fill_parent"
+                android:background = "#008be3"
+                android:gravity = "center_horizontal"
+                android:id = "@+id/linear">
+
+    <ImageView
+            android:src = "@drawable/logo"
+            android:layout_marginTop = "25dp"
+            android:layout_marginLeft = "25dp"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"/>
+
+    <TextView
+            android:id = "@+id/a"
+            android:text = "展览路街道"
+            android:textSize = "35sp"
+            android:textColor = "#fff"
+            android:layout_marginTop = "150dp"
+            android:gravity = "center"
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"/>
+
+
+    <ImageView
+
+            android:layout_width = "wrap_content"
+            android:src = "@drawable/welcome_center"
+            android:layout_marginTop = "20dip"
+            android:layout_centerHorizontal = "true"
+            android:id = "@+id/zhineng"
+            android:layout_below = "@+id/a"
+            android:layout_height = "wrap_content"/>
+
+    <ImageView
+            android:layout_width = "wrap_content"
+            android:src = "@drawable/welcome_center_line"
+            android:layout_below = "@+id/zhineng"
+            android:layout_alignLeft = "@+id/zhineng"
+            android:layout_centerHorizontal = "true"
+            android:layout_height = "wrap_content"/>
+
+    <TextView
+            android:text = "2015 All Rights Reserved 助力传媒"
+            android:layout_marginBottom = "60dip"
+            android:textSize = "16sp"
+            android:textColor = "#fff"
+            android:gravity = "center"
+            android:layout_alignParentBottom = "true"
+            android:layout_above = "@+id/zhineng"
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"/>
+</RelativeLayout>
